@@ -1,5 +1,5 @@
-import java.sql.*;
-
+import java.sql.*; //it means import all the jdbc classes from java SQl package
+/*jdbc includes-connection,driver manager,preparedstatement,resultset,statement.*/
 public class BookManagement {
 
     // Supabase PostgreSQL Connection Details
@@ -7,14 +7,14 @@ public class BookManagement {
         "jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=10";
 
     static final String USER = "postgres.yrzvgbmokcawwsvmzibi";
-    static final String PASSWORD = "tq50ESC5s3pLh8bs";
+    static final String PASSWORD = "Iamkush@2006";
 
     public static void main(String[] args) {
 
         try {
 
             // Load PostgreSQL Driver
-Class.forName("org.postgresql.Driver");
+Class.forName("org.postgresql.Driver");/*this line loads JDBC driver into the memory, without them java cant communicate with postgresql */
 
             // Connect Database
             Connection con = DriverManager.getConnection(
@@ -39,9 +39,9 @@ insertStmt.setString(1, "Java Programming");
 insertStmt.setString(2, "James Gosling");
 insertStmt.setDouble(3, 599.99);
 
-            int insertResult = insertStmt.executeUpdate();
+            int insertResult = insertStmt.executeUpdate();//this lines to use execute the insert query and resturns the rows affected.
 
-System.out.println(insertResult + " Book Inserted");
+System.out.println(insertResult + " Book Inserted");// output = 1 book inserted.
 
 
             // ==============================
@@ -50,9 +50,9 @@ System.out.println(insertResult + " Book Inserted");
 
             String fetchQuery = "SELECT * FROM books";
 
-            Statement stmt = con.createStatement();
+            Statement stmt = con.createStatement();//this lines helps you to create the statement object.
 
-ResultSet rs = stmt.executeQuery(fetchQuery);
+ResultSet rs = stmt.executeQuery(fetchQuery);// using the method of executeQuery method to store all the values that we fetched in the rs.
 
 System.out.println("\nBook Records:");
 
@@ -64,7 +64,7 @@ rs.getString("title") + " | " +
 rs.getString("author") + " | " +
 rs.getDouble("price")
                 );
-            }
+            }// these are the things we are going to use to read the rs row by row and print it.
 
 
             // ==============================
@@ -75,12 +75,12 @@ rs.getDouble("price")
                     "UPDATE books SET price=? WHERE id=?";
 
 PreparedStatement updateStmt =
-con.prepareStatement(updateQuery);
+con.prepareStatement(updateQuery);//we are using the con object to call the prepareStatement function to update query.
 
-updateStmt.setDouble(1, 799.99);
-updateStmt.setInt(2, 1);
+updateStmt.setDouble(1, 799.99);//1 place holder of price which value is 799.99
+updateStmt.setInt(2, 1);// 2 place holder of id which value is 1
 
-            int updateResult = updateStmt.executeUpdate();
+            int updateResult = updateStmt.executeUpdate();// it is used to execute hte update query
 
 System.out.println(
                     "\n" + updateResult + " Book Updated"
